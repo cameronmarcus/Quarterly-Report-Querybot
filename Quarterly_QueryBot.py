@@ -40,12 +40,12 @@ def main():
     query_engine = index.as_query_engine(streaming=False)
     company = query_engine.query("What company is this report for? Give me only the name of the company and nothing else.")
 
-    more = True
-    while(more):
-        query = input(f"Enter question regarding {company}'s report: ")
+    while(True):
+        query = input(f"Enter question regarding {company}'s report (Enter 'q' to quit): ")
+        if query == "q":
+            return
         response = query_engine.query(query)
         print("\n", textwrap.fill(str(response), 100), "\n")
-        more = False if(input("\nContinue y/n?: ") == "n") else True
 
 if __name__ == "__main__":
     main()
